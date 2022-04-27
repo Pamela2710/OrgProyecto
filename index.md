@@ -1,10 +1,10 @@
 ## Proyecto Organización de Computadores
 
-Nicolee Caicedo 
+Nicole Caicedo 
 Pamela Pupiales
 Juan Antonio Romero
 
-### Markdown
+### Calculadora con microcontrolador 
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
