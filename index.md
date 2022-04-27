@@ -1,8 +1,11 @@
 ## Proyecto Organización de Computadores
 
-Nicole Caicedo 
+Nicole Caicedo
+
 Pamela Pupiales
+
 Juan Antonio Romero
+
 
 ### Calculadora con microcontrolador 
 
