@@ -1,6 +1,6 @@
 ## Proyecto Organización de Computadores
 
-Nicole Caicedo 
+Nicolee Caicedo 
 Pamela Pupiales
 Juan Antonio Romero
 
