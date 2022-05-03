@@ -8,7 +8,10 @@ Juan Antonio Romero
 
 
 ### Calculadora con microcontrolador 
-hghgh
+La propuesta de este proyecto es crear una calculadora la cual pueda sumar, restar, multiplicar y dividir. Se realizará un circuito en cual usará un microcontrolador que será programado para poder realizar estas operaciones. 
+
+![image](https://user-images.githubusercontent.com/89537755/166595977-9d7193aa-33e8-4e22-a134-4c1fc9b08316.png)
+
 #### Qué es un microcontrolador
 hghg
 #### Qué microntrolador vse va a usar
