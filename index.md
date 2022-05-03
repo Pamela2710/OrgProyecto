@@ -8,7 +8,9 @@ Juan Antonio Romero
 
 
 ### Calculadora con microcontrolador 
-### Qué es un microcontrolador
+#### Qué es un microcontrolador
+#### Qué microntrolador vse va a usar
+*Caracteristicas* 
 
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
