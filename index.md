@@ -623,11 +623,13 @@ int main(void)
 }
 ```
 
-### Circuto completo
-
 #### Funcionamiento del circuito en el simulador
 
 ![image](https://user-images.githubusercontent.com/89537755/166611905-1e1fd8c6-814b-43c8-bd4c-737315ca75f5.png)
+
+### Circuto completo
+
+![image](https://user-images.githubusercontent.com/89537755/166617527-d204b969-0831-4d31-bc9d-c474f12aff43.png)
 
 #### Funcionamiento del circuito fisico
 
