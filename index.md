@@ -14,8 +14,10 @@ La propuesta de este proyecto es crear una calculadora la cual pueda sumar, rest
 
 #### Qué es un microcontrolador
 hghg
-#### Qué microntrolador vse va a usar
+#### Qué microntrolador se va a usar
 ghgh
+#### Uso de clock y capacitores 
+
 #### Caracteristicas
 hghgh
 
@@ -25,8 +27,13 @@ El lenguaje C es un lenguaje de programación muy importante en la actualidad ya
 Este lenguaje no depende del hardware. Se lo puede usar para programar sistemas operativos, hojas de cálculo e inclusive juegos. 
 ![image](https://user-images.githubusercontent.com/89537755/166604605-9b5d81d3-a718-4aca-a586-55dc8bdd1ce3.png)
 
-
 #### Programas que se usan 
+Los programas que usamos son:
+-ASBG O USBASP
+-Ambiente: microchip studio  ![image](https://user-images.githubusercontent.com/89537755/166606030-a7e7d91f-7f59-4693-abea-3c827f4ee055.png)
+
+-PROGISP Y ZADIG ---> Programas para cargar 
+
 
 #### Componentes circuito de la calculadora
 
