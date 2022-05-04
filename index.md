@@ -65,8 +65,8 @@ Los programas que usamos son:
 ![image](https://user-images.githubusercontent.com/89537755/166621057-cba67523-6fb7-40b7-a979-3e440ef302b4.png)
 
 
-#### Codigo para la calculadora
-LCD_ML.h
+## Codigo para la calculadora
+### LCD_ML.h
 ```markdown
 /*
  * LCD_ML.h
@@ -77,15 +77,15 @@ LCD_ML.h
 
 #include "LCD_HW.h"
 
-/*SEND COMMANDS OVER DATA BUS*/
+/*envia comandos*/
 
 void cmd(char cmd_data);
 
 void cmd(char cmd_data)
 {
-	mode_select(0);			//SELECT COMMAND MODE
+	mode_select(0);			//selecciona el modo del comando
 	
-	port(cmd_data);			//SEND COMAND TO PORT (DATABUS)
+	port(cmd_data);			//envia el comando al puerto (DATABUS)
 	
 	enb_tri();				//ENABLE TRIGGER
 }
@@ -96,18 +96,18 @@ void lcd_init(void);
 
 void lcd_init(void)
 {
-	set_port();		//SET DATABUS
+	set_port();		//set del DATABUS
 	
-	cmd(0);			//RETURN CURSOR TO HOME POISTION - COMMAND 0X02
+	cmd(0);			//retorna el cursor a la posicion inicial - COMMAND 0X02
 	cmd(2);
 	
-	cmd(2);			//DISPLAY IN 2-LINES AND 4-BIT DATA MODE - COMMAND 0X28
+	cmd(2);			//despliega en 2 lineas y 4 bits- COMMAND 0X28
 	cmd(8);
 	
-	cmd(0);			//DISPLAY NO CURSOR AND NO BLINK - COMMAND 0X0C
+	cmd(0);			//no despliega cursor ni parpadeo - COMMAND 0X0C
 	cmd(12);
 	
-	cmd(0);			//DD RAM ADDRESS WITH NO OFFSET - COMMAND 0X06
+	cmd(0);			//direccion ram sin offset - COMMAND 0X06
 	cmd(6);
 }
 
@@ -119,17 +119,17 @@ void dis_char(char data)
 {
 	char msb, lsb;
 	
-	msb = data & 0xF0;		//ASSIGN DATA MOST SIGNIFICANT BITS TO msb
+	msb = data & 0xF0;		//asigna los bits mas importantes de los datos a msb
 	
-	lsb = data & 0x0F;		//ASSIGN DATA LEAST SIGNIFICANT BITS TO lsb
+	lsb = data & 0x0F;		//asigna los bits menos significativos de los datos a lsb
 	
-	mode_select(1);			//SELECT DATA MODE
+	mode_select(1);			//selecciona el dta mode
 	
-	port(msb>>4);			//SEND msb OVER DATABUS
+	port(msb>>4);			//envia msb a databus
 	
 	enb_tri();
 	
-	port(lsb);				//SEND lsb OVER DATABUS
+	port(lsb);				//envia lsb a DATABUS
 	
 	enb_tri();
 }
@@ -140,14 +140,14 @@ void dis_position(char i, char j);
 
 void dis_position(char i, char j)
 {
-	if (i==0)			//IF i = 0 DISPLAY IN FIRST LINE
-	{					//COMMAND FOR FIRST LINE IS 0X80
-		cmd(8);			//SEND COMMAND msb FIRST AND lsb SECOND
-		cmd(j);			//j IS THE HORIZONTAL POSITION
+	if (i==0)			//IF i = 0 despliega la primera linea
+	{					//comando para primera linea 0X80
+		cmd(8);			//envia comando msb PRIMERO y lsb SEGUNDO
+		cmd(j);			//j es la posicion horizontal
 	} 
-	else if (i==1)		//IF i = 1 DISPLAY IN SECOND LINE
+	else if (i==1)		//IF i = 1 despliega en la segunda linea
 	{
-		cmd(12);		//COMMAND FOR SECOND LINE IS 0XC0, C = 12
+		cmd(12);		//comando para segunda linea es 0XC0, C = 12
 		cmd(j);	
 	}
 }
@@ -158,10 +158,10 @@ void clr_dis(void);
 
 void clr_dis(void)
 {
-	cmd(0);		//CLEAR DISPLAY COMMAND 0X01
+	cmd(0);		//vaciar el display 0X01
 	cmd(1);
 	
-	cmd(0);		//RETTURN CURSOR HOME COMMAND 0X02
+	cmd(0);		//retornar el cursor a inicio 0X02
 	cmd(2);
 }
 
@@ -173,11 +173,11 @@ void dis_string(unsigned char row, unsigned char col, char *str)
 {
 	dis_position( row, col );
 	
-	while (*str!='\0')		//while string pointer do not point to nothing
+	while (*str!='\0')		//while el puntero del string no apunte a nada
 	{
-		dis_char(*str);		//call dis_char functions to display what string pointer points to
+		dis_char(*str);		//lllama a la funcion  dis_char para desplegrarlo que el string pointer apunta
 		
-		++str;				//increment string pointer to point to the next character in the array
+		++str;				//incrementa el string pointer para que apunte al siguiente character
 	}
 }
 
@@ -189,17 +189,17 @@ void dis_shift(char dir)
 {
 	if ( dir == 'R' )
 	{
-		cmd(1);				//SHIFT RIGHT COMMAND 0X18
+		cmd(1);				//comando para cambiar a la derecha 0X18
 		cmd(8);
 	}
 	else if ( dir == 'L' )
 	{
-		cmd(1);				//SHIFT LEFT COMMAND 0X1C
+		cmd(1);				//comando para cambiar a la izquierda 0X1C
 		cmd(12);
 	}
 }
 ```
-LCD_HW.h
+### LCD_HW.h
 ```markdown
 /*
  * LCD_HW.h
@@ -217,15 +217,15 @@ LCD_HW.h
 
 #include <util/delay.h>
 
-#define set_bit(reg,pos) reg|=(1<<pos)		// used to set bit x on register x to 1
+#define set_bit(reg,pos) reg|=(1<<pos)		// se usa para hacer set al bit x en el registro x to 1
 
-#define clr_bit(reg,pos) reg&=~(1<<pos)		// used to clear bit x on register x to 0
+#define clr_bit(reg,pos) reg&=~(1<<pos)		// se usa para vacial el bit x en el registro x to 0
 
-#define tog_bit(reg,pos) reg^=(1<<pos)		// used to toggle bit x on register x from x to x`
+#define tog_bit(reg,pos) reg^=(1<<pos)		// se usa para anclar el  bit x en el registro x from x to x`
 
 /********************************************************************************************************/
 
-/*SEND DATA TO HW PORT*/
+/*envia datos desde el puerto hw*/
 
 void port(char cmd_port);
 
@@ -252,17 +252,17 @@ void port(char cmd_port)
 	clr_bit(PORTC,3);		//IF 4TH BIT = 0 CLR PB3
 }
 
-/*SWITCH BETWEEN COMMAND MODE OR DATA MODE*/
+/*cambia entre COMMAND MODE O DATA MODE*/
 
 void mode_select(char m);
 
 void mode_select(char m)	 
 {
 	if ( m == 0)
-	clr_bit(PORTC,5);		// RS = 0 --> SWITCH TO LCD CONTROL REGISTER - COMMAND MODE
+	clr_bit(PORTC,5);		// RS = 0 --> cambia a LCD CONTROL REGISTER - COMMAND MODE
 	
 	if ( m == 1)
-	set_bit(PORTC,5);		// RS = 1 --> SWITCH TO LCD DATA REGISTER - DATA MODE
+	set_bit(PORTC,5);		// RS = 1 --> cambia a LCD DATA REGISTER - DATA MODE
 }
 
 /*TRIIGERS THE ENABLE BIT*/
@@ -271,22 +271,22 @@ void enb_tri(void);
 
 void enb_tri(void)
 {
-	set_bit(PORTC,4);		//RAISE ENABLE EN = 1
+	set_bit(PORTC,4);		//levanta enable en  EN = 1
 	_delay_us(50);
 	
-	clr_bit(PORTC,4);		//TOGGLE ENABLE
-	_delay_us(500);			//HIGH DELAY TO PREVENT DATA OVER FLOW
+	clr_bit(PORTC,4);		//ancla el enable
+	_delay_us(500);			//hace un delay alto para prevenir data overflow
 }
 
-/*INITIALIZE DATABUS TO HW PORT*/
+/*inicializa DATABUS a el puerto HW*/
 
 void set_port(void);
 
 void set_port(void){
-	DDRC |= 0X3F;	//ASSIGN DATABUS PB0-PB3, CONTROLBUS EN-PB4 RS-PB5
+	DDRC |= 0X3F;	//Asigna DATABUS PB0-PB3, CONTROLBUS EN-PB4 RS-PB5
 }
 ```
-keypad.h
+### keypad.h
 ```markdown
 /*
  * keypad_lib.h
@@ -303,17 +303,17 @@ keypad.h
 
 #include <avr/io.h>
 
-#define clr_bit(reg,pos) reg&=~(1<<pos)		//used to clear bit x on register x to 0
+#define clr_bit(reg,pos) reg&=~(1<<pos)		//vaciar bit x en el registro x to 0
 
 
-void key_init(void);						//initialize keypad
+void key_init(void);						//inicializa el keypad
 
 void Key_init(void)
 {
-	DDRA = 0x0F;			//assign rows bits PA0-PA3 as outputs and columns bits PA4-PA7 as inputs
+	DDRA = 0x0F;			//asigna las finas de bits PA0-PA3 como outputs and columnas de bits PA4-PA7 como inputs
 }
 
-unsigned char key_scan(void);				//scan pressed key and return it
+unsigned char key_scan(void);				//scanea la tecla aplastada y la devuelve 
 
 unsigned char key_scan(void)
 {
@@ -323,117 +323,117 @@ unsigned char key_scan(void)
 	
 	for ( cnt = 0 ; cnt < 4 ; ++cnt )
 	{
-		PORTA = 0XFF;				//first level check rows one by one
+		PORTA = 0XFF;				//chequea las filas una por una en primer nivel
 		
 		if ( cnt == 0 )
-			clr_bit(PORTA,0);		//first row check
+			clr_bit(PORTA,0);		//check d eprimera fila
 			
 		if ( cnt == 1 )
-			clr_bit(PORTA,1);		//second row check
+			clr_bit(PORTA,1);		//check de segunda fila
 		
 		if ( cnt == 2 )
-			clr_bit(PORTA,2);		//third row check
+			clr_bit(PORTA,2);		//check de tercera fila
 		
 		if ( cnt == 3 )
-			clr_bit(PORTA,3);		//fourth row check
+			clr_bit(PORTA,3);		//check de cuarta fila
 		
-		key = PINA & 0xF0;			//check if any key is pressed
+		key = PINA & 0xF0;			//checkea si alguna tecla esta siendo aplastada
 		
-		if ( key != 0xF0 )			//if any key pressed go to the second level
+		if ( key != 0xF0 )			//si alguna techa esta siendo aplastada, revisa el segundo nivel
 		{
 			while ( ( PINA & 0xF0 ) != 0xF0 );
 			break;
 		}
 	}
 	
-	if ( cnt == 4 )					//end of first level scan loop
+	if ( cnt == 4 )					//termina el scan loop del primer nivel
 		return 0;
 		
-	switch ( cnt )					//scan columns
+	switch ( cnt )					//scanea las columns
 	{
-		case 0:						//case 0 for first row
+		case 0:						//case 0 para primera fila
 			
 			switch ( key )			
 				{
-					case 0xE0:		//Check if row 1 col 1 --> ( 7 )
+					case 0xE0:		//Checkea si la fila 1 col 1 --> ( 7 )
 					return 0x07;
 					break;
 					
-					case 0xD0:		//Check if row 1 col 2 --> ( 8 )
+					case 0xD0:		//Checkea si la fila 1 col 2 --> ( 8 )
 					return 0x08;
 					break;
 					
-					case 0xB0:		//Check if row 1 col 3 --> ( 9 )
+					case 0xB0:		//Checkea si la fila 1 col 3 --> ( 9 )
 					return 0x09;
 					break;
 					
-					case 0x70:		//Check if row 1 col 4 --> ( A )
+					case 0x70:		//Checkea si la fila 1 col 4 --> ( A )
 					return 0x0A;
 					break;
 				}
 		break;
 		
-		case 1:						//case 1 for second row
+		case 1:						//case 1 para segunda fila
 		
 			switch ( key )
 				{
-					case 0xE0:		//Check if row 2 col 1 --> ( 4 )
+					case 0xE0:		//Checkea si la fila 2 col 1 --> ( 4 )
 					return 0x04;
 					break;
 			
-					case 0xD0:		//Check if row 2 col 2 --> ( 5 )
+					case 0xD0:		//Checkea si la fila 2 col 2 --> ( 5 )
 					return 0x05;
 					break;
 			
-					case 0xB0:		//Check if row 2 col 3 --> ( 6 )
+					case 0xB0:		//Checkea si la fila 2 col 3 --> ( 6 )
 					return 0x06;
 					break;
 			
-					case 0x70:		//Check if row 2 col 4 --> ( B )
+					case 0x70:		//Checkea si la fila 2 col 4 --> ( B )
 					return 0x0B;
 					break;
 				}
 		break;
 		
-		case 2:						//case 2 for third row
+		case 2:						//case 2 para tercera fila
 		
 			switch ( key )
 				{
-					case 0xE0:		//Check if row 3 col 1 --> ( 1 )
+					case 0xE0:		//Checkea si la fila 3 col 1 --> ( 1 )
 					return 0x01;
 					break;
 			
-					case 0xD0:		//Check if row 3 col 2 --> ( 2 )
+					case 0xD0:		//Checkea si la fila 3 col 2 --> ( 2 )
 					return 0x02;
 					break;
 			
-					case 0xB0:		//Check if row 3 col 3 --> ( 3 )
+					case 0xB0:		//Checkea si la fila 3 col 3 --> ( 3 )
 					return 0x03;
 					break;
 			
-					case 0x70:		//Check if row 3 col 4 --> ( C )
+					case 0x70:		//Checkea si la fila 3 col 4 --> ( C )
 					return 0x0C;
 					break;
 				}
 		break;
 		
-		case 3:						//case 3 for fourth row
+		case 3:						//case 3 para cuarta fila
 		
 			switch ( key )
 			{
-					case 0xE0:		//Check if row 4 col 1 --> ( F )
+					case 0xE0:		//Checkea si la fila 4 col 1 --> ( F )
 					return 0x0F;
 					break;
 					
-					case 0xD0:		//Check if row 4 col 2 --> ( 0 )
+					case 0xD0:		//Checkea si la fila 4 col 2 --> ( 0 )
 					return '0';
 					break;
 					
-					case 0xB0:		//Check if row 4 col 3 --> ( E )
+					case 0xB0:		//Checkea si la fila 4 col 3 --> ( E )
 					return 0x0E;
 					break;
 					
-					case 0x70:		//Check if row 4 col 4 --> ( D )
+					case 0x70:		//Checkea si la fila 4 col 4 --> ( D )
 					return 0x0D;
 					break;
 			}
@@ -462,17 +462,17 @@ calc.h
 
 
 
-static unsigned int key;		//key variable to store pressed key
+static unsigned int key;		//la variable a guardar es la tecla presionada
 
-static unsigned int op;			//op variable to store operation ID and op_char for operation symbol
+static unsigned int op;			//op variable para guardar el operation ID y op_char para operaciones de symbolo
 
 static char op_char;
 		
-long int a, b;					//a & b variables to store two numbers of operation
+long int a, b;					//a & b para guardar dos numeros de operacion
 			
-static double result;			//result value should be stored in this variable
+static double result;			//el resultado se debe guardar en esta variable 
 			
-static char lcd_buf[16];		//lcd_buf array is the lcd buffer
+static char lcd_buf[16];		//lcd_buf array es el lcd buffer
 
 
 
@@ -491,46 +491,46 @@ void cal_op(void);
 
 void cal_op(void)
 {
-	 if(key==0x0D)			//operation add
+	 if(key==0x0D)			//suma
 	{
 		key=0;
 		op=1;
 		op_char='+';
 	}
 	
-	else if(key==0x0C)		//operation subtraction
+	else if(key==0x0C)		//resta
 	{
 		key=0;
 		op=2;
 		op_char='-';
 	}
 	
-	else if(key==0x0B)		//operation multiplication
+	else if(key==0x0B)		//multiplicacion
 	{
 		key=0;
 		op=3;
 		op_char='x';
 	}
 
-	else if(key==0x0A)		//operation division
+	else if(key==0x0A)		//division
 	{
 		key=0;
 		op=4;
 		op_char='/';
 	}
 	
-	else if(key==0x0E)		//operation execution
+	else if(key==0x0E)		//ejecusion
 	{
 		key=0;
 		op=5;
 	}
 
-	else if(key=='0')		//allow ZERO-Bug Fix
+	else if(key=='0')		//permite ZERO-Bug Fix
 	{
 		key=0;
 	}
 	
-	else if(key==0x0F)		//operation on/clear
+	else if(key==0x0F)		// on/clear
 	{
 		a=0;	
 		b=0;
@@ -541,29 +541,29 @@ void cal_op(void)
 	}
 }
 
-/*run the calculation process*/
+/*proceso de calculo*/
 void cal_run(void);
 
 void cal_run(void)
 {
 
-		if(op==0)										//if no operation is selected then store the first number
+		if(op==0)										//si no hay operacion seleccionada guarda el primer numero
 		{
-			a=a*10+key;									//storing number of n digits
+			a=a*10+key;									//guarda numero de n digitos
 			sprintf(lcd_buf,"%1li",a);
 			dis_string(0,0,lcd_buf);
 		}
-														//if Any operation is selected then start storing the second number
+														//si se selecciona alguna operacion, comienza a guardar el segundo numero
 		else if(op==1 || op==2 || op==3 || op==4)
 		{
-			b=b*10+key;									//display both numbers at the same time through lcd buffer
+			b=b*10+key;									//despliega los dos numeros al mismo tiempo en el LCD buffer
 			sprintf(lcd_buf,"%1li%c%1li",a,op_char,b);
 			dis_string(0,0,lcd_buf);
 		}
 		
-		else if(op==5)									//if operation execute is selected
+		else if(op==5)									//si la operacion execute se selecciona
 		{		
-														//select between different operations 
+														//selecciona entre diferentes operaciones
 			if(op_char=='+')
 				result=a+b;
 			
@@ -575,29 +575,29 @@ void cal_run(void)
 			
 			else if(op_char=='/')
 				result=(float)a/b;
-														//display the result 
+														//displiega el resultado
 			sprintf(lcd_buf,"%.0f",result);
 			dis_string(1,12,lcd_buf);
 				
-			a=0;										//clear the memory for next calculation
+			a=0;										//vacia la memoria para el siguiente calculo
 			b=0;
 			result=0;
 			op=0;
 		}
 }
 
-/*run the calculator*/
+/*corre la calculadora*/
 void calculate(void);
 
 void calculate(void)
 {
-		key = key_scan();		//obtain key pressed
+		key = key_scan();		//obtiene la tecla presionada
 				
 		if (key != 0)			//if key = true
 		{
-			cal_op();			//first check if pressed key is operation identifier
-			cal_run();			//store number or apply operation
-			key = 0;			//clear key for next trial
+			cal_op();			//primero chequea si la tecla presionada es un ID de operacion
+			cal_run();			//guarda el numero o aplica la operacion
+			key = 0;			//limpia key para el siguiente intento
 		}
 }
 ```
@@ -616,9 +616,6 @@ cal.c
 int main(void)
 {
 		cal_init();
-		
-			dis_string(0,0,"Organización de");
-			dis_string(1,0,"Computadores");
 			
 			_delay_ms(50);
 			
@@ -637,7 +634,7 @@ int main(void)
 
 #### Funcionamiento del circuito en el simulador
 
-![image](https://user-images.githubusercontent.com/89537755/166611905-1e1fd8c6-814b-43c8-bd4c-737315ca75f5.png)
+![image](https://user-images.githubusercontent.com/89537755/166695578-ffc3b979-865a-4973-907b-63573f5d64b0.png)
 
 ### Circuto completo
 
