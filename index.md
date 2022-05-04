@@ -13,11 +13,13 @@ La propuesta de este proyecto es crear una calculadora la cual pueda sumar, rest
 ![image](https://user-images.githubusercontent.com/89537755/166595977-9d7193aa-33e8-4e22-a134-4c1fc9b08316.png)
 
 #### Qué es un microcontrolador
-hghg
-#### Qué microntrolador se va a usar
-ghgh
-#### Uso de clock y capacitores 
+Un microcontrolador es un circuito que esta integrado y nos permitira ejecutar tareas de control.Es como un computador que nos dejara hacer trabajos mediante entrada y salida.Este tiene un processador y tambien tiene la capacidad de guardar memoria
 
+#### Qué microntrolador se va a usar
+Vamos a utilizar el microcontrolador atmega16, este nos deja processar datos de 8 bits. Su arquitectura se basa en la RISC que tiene 131 instrucciones y tiene 32 registros integradoos
+#### Uso de clock y capacitores 
+Capacitor: Lo utilizamos para almacenar y entregar electricidad de manera controlada
+Clock:Es la señal en binario que se usa para sincoronizar las acciones de el circuito
 #### Caracteristicas
 hghgh
 
