@@ -29,11 +29,21 @@ Este lenguaje no depende del hardware. Se lo puede usar para programar sistemas 
 
 #### Programas que se usan 
 Los programas que usamos son:
--ASBG O USBASP
--Ambiente: microchip studio  ![image](https://user-images.githubusercontent.com/89537755/166606030-a7e7d91f-7f59-4693-abea-3c827f4ee055.png)
 
--PROGISP Y ZADIG ---> Programas para cargar 
+-AVR O USBASP ---> es un dispositivo que sirve para cargar el programa de la compu al microcontrolador
+![image](https://user-images.githubusercontent.com/89537755/166607983-308339d4-eef5-41b5-a656-5462a2c35bfa.png)
 
+-ZADIG---> programa para que windows detecte USBASP. Windows debe autorizar y dejar cargar. Instalador de controladores
+
+![image](https://user-images.githubusercontent.com/89537755/166608559-28d4c641-e594-4b05-a2e7-2bc1dba6339b.png)
+
+-PROGISP   ---> Detecta cualdo el AVR está conectado al microcontrolador y en ese programa es dode se carga el código. Un archivo .hex
+
+![image](https://user-images.githubusercontent.com/89537755/166608684-ab61a7bc-b5e0-4d73-85c6-38604d5bed52.png)
+
+-Ambiente: microchip studio  
+
+![image](https://user-images.githubusercontent.com/89537755/166606030-a7e7d91f-7f59-4693-abea-3c827f4ee055.png)
 
 #### Componentes circuito de la calculadora
 
