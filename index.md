@@ -47,6 +47,8 @@ Los programas que usamos son:
 
 #### Componentes circuito de la calculadora
 
+![image](https://user-images.githubusercontent.com/89537755/166610753-e53d4420-81ac-439d-91f6-60a3edefb642.png)
+
 #### Codigo para la calculadora
 
 
