@@ -45,6 +45,9 @@ Los programas que usamos son:
 -AVR O USBASP ---> es un dispositivo que sirve para cargar el programa de la compu al microcontrolador
 ![image](https://user-images.githubusercontent.com/89537755/166607983-308339d4-eef5-41b5-a656-5462a2c35bfa.png)
 
+![image](https://user-images.githubusercontent.com/89537755/166621306-ee240c40-2563-4138-92d6-d552d2026018.png)
+
+
 -ZADIG---> programa para que windows detecte USBASP. Windows debe autorizar y dejar cargar. Instalador de controladores
 
 ![image](https://user-images.githubusercontent.com/89537755/166608559-28d4c641-e594-4b05-a2e7-2bc1dba6339b.png)
@@ -59,7 +62,8 @@ Los programas que usamos son:
 
 #### Componentes circuito de la calculadora
 
-![image](https://user-images.githubusercontent.com/89537755/166610753-e53d4420-81ac-439d-91f6-60a3edefb642.png)
+![image](https://user-images.githubusercontent.com/89537755/166621057-cba67523-6fb7-40b7-a979-3e440ef302b4.png)
+
 
 #### Codigo para la calculadora
 LCD_ML.h
@@ -572,8 +576,8 @@ void cal_run(void)
 			else if(op_char=='/')
 				result=(float)a/b;
 														//display the result 
-			sprintf(lcd_buf,"=%.2f",result);
-			dis_string(1,0,lcd_buf);
+			sprintf(lcd_buf,"%.0f",result);
+			dis_string(1,12,lcd_buf);
 				
 			a=0;										//clear the memory for next calculation
 			b=0;
