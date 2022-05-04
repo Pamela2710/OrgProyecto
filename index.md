@@ -16,10 +16,12 @@ La propuesta de este proyecto es crear una calculadora la cual pueda sumar, rest
 Un microcontrolador es un circuito que esta integrado y nos permitira ejecutar tareas de control.Es como un computador que nos dejara hacer trabajos mediante entrada y salida.Este tiene un processador y tambien tiene la capacidad de guardar memoria
 
 #### Qué microntrolador se va a usar
-Vamos a utilizar el microcontrolador atmega16, este nos deja processar datos de 8 bits. Su arquitectura se basa en la RISC que tiene 131 instrucciones y tiene 32 registros integradoos
+Vamos a utilizar el microcontrolador atmega16, este nos deja processar datos de 8 bits. Su arquitectura se basa en la RISC que tiene 131 instrucciones y tiene 32 registros integradoos, rendimiento de hasta 20 MIPS a 20 MHz
+
 #### Uso de clock y capacitores 
 Capacitor: Lo utilizamos para almacenar y entregar electricidad de manera controlada
 Clock:Es la señal en binario que se usa para sincoronizar las acciones de el circuito
+
 #### Caracteristicas
 hghgh
 
