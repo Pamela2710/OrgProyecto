@@ -642,7 +642,7 @@ int main(void)
 
 #### Funcionamiento del circuito fisico
 
-[Link del video](youtu.be/236jLhVPW8Q)
+[Link del video](https://youtu.be/236jLhVPW8Q)
 
 
 
